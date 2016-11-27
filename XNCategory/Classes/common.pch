@@ -1,0 +1,149 @@
+//
+//  AskTeacher.pch
+//  AskTeacher
+//
+//  Created by xuneng on 15/7/21.
+//  Copyright (c) 2015年 xn4545945. All rights reserved.
+//
+
+
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+//#import "ACMacros.h"  //聊天的宏
+
+#import "UIView+AccessFrameComponent.h"
+#import "UIImage+DrawImage.h"
+#import "UIView+RoundCorner.h"
+
+//#import "XNHttpTool.h"
+//#import "XNTips.h"
+
+//#import "SVProgressHUD.h"
+
+//#import "UIImageView+WebCache.h"
+//#import "UIButton+WebCache.h"
+
+#endif
+
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef DEBUG
+#define XNLog(...)  NSLog(__VA_ARGS__)
+#else
+#define XNLog(...)
+#endif
+
+
+// 定义weak类型实例
+#define XNWeakObj(weakObj, obj)  __weak __typeof(&*obj)weakObj = obj
+#define XNDefineWeakSelf STWeakObj(weakSelf, self)
+
+// 使用block
+#define XNSafeBlock(block,...)  \
+if (block){\
+block(__VA_ARGS__);\
+}
+
+
+//屏幕尺寸等
+#define kScreenWidth [[UIScreen mainScreen] bounds].size.width
+#define kScreenHeight [[UIScreen mainScreen] bounds].size.height
+
+#define ROOTVC [[[UIApplication sharedApplication] keyWindow] rootViewController]
+#define kKeyWindow [UIApplication sharedApplication].keyWindow
+
+
+#define kSystemVersion [[[UIDevice currentDevice] systemVersion] intValue]
+
+#define kHigher_iOS_6_1 (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1)
+#define kHigher_iOS_6_1_DIS(_X_) ([[NSNumber numberWithBool:kHigher_iOS_6_1] intValue] * _X_)
+#define kNotHigher_iOS_6_1_DIS(_X_) (-([[NSNumber numberWithBool:kHigher_iOS_6_1] intValue]-1) * _X_)
+
+
+#define kDevice_Is_iPhone4s ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
+#define kDevice_Is_iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+#define kDevice_Is_iPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO)
+#define kDevice_Is_iPhone6Plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) : NO)
+
+
+#define XNRandomColor [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:arc4random_uniform(255)/255.0]
+#define XNRandomColorNoAlpha [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1.0]
+#define XNRandomData [NSString stringWithFormat:@"随机数据---%d", arc4random_uniform(1000000)]
+#define XNRandomString [NSString stringWithFormat:@"test%d", arc4random_uniform(1000000)]
+
+
+#define kNetworkFailTip [XNTips MBTipLongText:@"网络异常" onView:self.view]
+
+//颜色值设置
+#define RGBCOLOR(r, g, b)       [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1.0]
+#define RGBACOLOR(r, g, b, a)   [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
+
+//字体颜色
+#define kMainColor [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0]    //黑色
+
+
+#define kUserToken @"kUserToken"  //从服务器的用户token
+#define kUserID @"kUserID"  //从服务器的用户ID
+#define kUserName @"kUserName"
+#define kNickName @"kNickName"
+#define kUserIconMediaID @"kUserIconMediaID"
+#define kIsUserLogin [[NSUserDefaults standardUserDefaults] valueForKey:kUserToken]   //判断用户是否登录/获取用户token
+#define kIsExistUserID [[NSUserDefaults standardUserDefaults] valueForKey:kUserID]   //判断用户是否登录/获取用户ID
+#define kIsExistUserName [[NSUserDefaults standardUserDefaults] valueForKey:kUserName]
+#define kIsExistNickName [[NSUserDefaults standardUserDefaults] valueForKey:kNickName]
+#define kIsExistUserIconMediaID [[NSUserDefaults standardUserDefaults] valueForKey:kUserIconMediaID]
+
+//通知
+#define kNotifChooseCategory @"kNotifChooseCategory"
+#define kNotifChooseCity @"kNotifChooseCity"
+
+#define kSuccessLogin @"kSuccessLogin"
+#define kSuccessLogout @"kSuccessLogout"
+
+
+//几个高度
+#define kTabbarHeight 49
+#define kStatusbarHeight 20
+#define kNavBarHeight 44
+
+
+// View 坐标(x,y)和宽高(width,height)
+#define X(v)                    (v).frame.origin.x
+#define Y(v)                    (v).frame.origin.y
+#define WIDTH(v)                (v).frame.size.width
+#define HEIGHT(v)               (v).frame.size.height
+
+#define MinX(v)                 CGRectGetMinX((v).frame)
+#define MinY(v)                 CGRectGetMinY((v).frame)
+
+#define MidX(v)                 CGRectGetMidX((v).frame)
+#define MidY(v)                 CGRectGetMidY((v).frame)
+
+#define MaxX(v)                 CGRectGetMaxX((v).frame)
+#define MaxY(v)                 CGRectGetMaxY((v).frame)
+
+
+//经纬度
+#define kLocationLatitude @"kLocationLatitude"
+#define kLocationLongitude @"kLocationLongitude"
+#define kLocationCity @"kLocationCity"
+#define kIsLatitude [[NSUserDefaults standardUserDefaults] valueForKey:kLocationLatitude]
+#define kIsLongitude [[NSUserDefaults standardUserDefaults] valueForKey:kLocationLongitude]
+#define kIsCity [[NSUserDefaults standardUserDefaults] valueForKey:kLocationCity]
+
+//首次启动
+#define kFirstRunAppStart @"kFirstRunAppStart"
+
+
+#define kSQLDB @"SQLDB.db"
+#define kSQLTablePublicData @"kSQLTablePublicData"  //存放共用数据的表
+#define kSQLTableUserData @"kSQLTableUserData"  //用户数据的表.
+
